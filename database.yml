@@ -8,13 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: hello_world_rails_development
+  database: qiita_clonerails_development
 
 test:
   <<: *default
-  database: hello_world_rails_test
+  database: qiita_clonerails_test
 
 production:
   <<: *default
-  database: hello_world_rails_production
-  
+  database: qiita_clonerails_production
