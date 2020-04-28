@@ -17,3 +17,4 @@ test:
 production:
   <<: *default
   database: hello_world_rails_production
+  
