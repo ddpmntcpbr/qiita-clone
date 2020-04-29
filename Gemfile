@@ -1,19 +1,18 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+source "https://rubygems.org"
+git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.2'
+ruby "2.6.2"
 
 gem "active_model_serializers", "~> 0.10.0"
+gem "bootsnap", ">= 1.1.0", require: false
+gem "coffee-rails", "~> 4.2"
 gem "devise_token_auth"
-
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-gem 'puma', '~> 3.11'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'webpacker'
-gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "mysql2", ">= 0.4.4", "< 0.6.0"
+gem "puma", "~> 3.11"
+gem "sass-rails", "~> 5.0"
+gem "turbolinks", "~> 5"
+gem "uglifier", ">= 1.3.0"
+gem "webpacker"
 
 group :development, :test do
   gem "pry-byebug"
@@ -25,10 +24,10 @@ end
 
 group :development do
   gem "annotate"
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "spring"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "web-console", ">= 3.3.0"
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
