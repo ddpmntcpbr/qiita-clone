@@ -35,9 +35,9 @@
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/RedundantBegin:
-  Exclude:
-    - 'bin/yarn'
+# Style/RedundantBegin:
+#   Exclude:
+#     - 'bin/yarn'
 
 # Offense count: 2
 # Cop supports --auto-correct.
