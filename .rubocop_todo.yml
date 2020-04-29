@@ -41,9 +41,9 @@
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Style/StderrPuts:
-  Exclude:
-    - 'bin/yarn'
+# Style/StderrPuts:
+#   Exclude:
+#     - 'bin/yarn'
 
 # Offense count: 72
 # Cop supports --auto-correct.
