@@ -113,6 +113,14 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+# * 警告 120文字
+# * 禁止 160文字
+# のイメージ
+Layout/LineLength:
+  Max: 160
+  Exclude:
+    - "db/migrate/*.rb"
+
 #################### Metrics ###############################
 
 # 30 まではギリギリ許せる範囲だったけど
@@ -138,14 +146,6 @@ Metrics/BlockLength:
 # 6 は強すぎるので緩める
 Metrics/CyclomaticComplexity:
   Max: 10
-
-# * 警告 120文字
-# * 禁止 160文字
-# のイメージ
-Metrics/LineLength:
-  Max: 160
-  Exclude:
-    - "db/migrate/*.rb"
 
 # 20 行超えるのは migration ファイル以外滅多に無い
 Metrics/MethodLength:
