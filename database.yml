@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: qiita_clone_rails_development
+  database: qiita_clone_development
 
 test:
   <<: *default
-  database: qiita_clone_rails_test
+  database: qiita_clone_test
 
 production:
   <<: *default
-  database: qiita_clone_rails_production
+  database: qiita_clone_production
