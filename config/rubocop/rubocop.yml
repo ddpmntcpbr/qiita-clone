@@ -51,6 +51,11 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceInsideBlockBraces:
   SpaceBeforeBlockParameters: false
 
+# メソッド呼び出し時に、不必要なスペースを入れてはいけない
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+
 #################### Lint ##################################
 
 # spec 内では
@@ -99,6 +104,14 @@ Lint/UnusedMethodArgument:
 # ようにすると誤検知がほぼ無くなる？
 Lint/Void:
   CheckForMethodsWithNoSideEffects: true
+
+
+Lint/RaiseException:
+  Enabled: true
+
+
+Lint/StructNewOverride:
+  Enabled: true
 
 #################### Metrics ###############################
 
@@ -421,3 +434,15 @@ Style/WordArray:
 # 中身を入れ替えて否定外しても良いんだけど、どちらが例外的な処理なのかが分かりづらくなる。
 Style/ZeroLengthPredicate:
   Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
