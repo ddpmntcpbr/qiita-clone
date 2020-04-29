@@ -28,10 +28,10 @@
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
 # SupportedStyles: space, no_space
 # SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideBlockBraces:
-  Exclude:
-    - 'Gemfile'
-    - 'config/spring.rb'
+# Layout/SpaceInsideBlockBraces:
+#   Exclude:
+#     - 'Gemfile'
+#     - 'config/spring.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
