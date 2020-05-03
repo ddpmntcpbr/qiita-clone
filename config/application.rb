@@ -44,6 +44,5 @@ module QiitaClone
     end
 
     config.api_only = true
-
   end
 end
