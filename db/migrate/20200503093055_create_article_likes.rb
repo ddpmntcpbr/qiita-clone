@@ -1,6 +1,6 @@
-class CreateArticleLikesTables < ActiveRecord::Migration[6.0]
+class CreateArticleLikes < ActiveRecord::Migration[6.0]
   def change
-    create_table :article_likes_tables do |t|
+    create_table :article_likes do |t|
       t.references :user, null: false, foreign_key: true
       t.references :article, null: false, foreign_key: true
 
