@@ -10,7 +10,7 @@ RSpec.describe Article, type: :model do
   end
 
   context "title が指定されていない場合" do
-    let(:article) { build(:article, title: nil)}
+    let(:article) { build(:article, title: nil) }
 
     it "エラーする" do
       article.valid?
@@ -19,7 +19,7 @@ RSpec.describe Article, type: :model do
   end
 
   context "titile が長すぎる場合" do
-    let(:article) { build(:article, title: "a" * 51)}
+    let(:article) { build(:article, title: "a" * 51) }
 
     it "エラーする" do
       article.valid?
@@ -28,7 +28,7 @@ RSpec.describe Article, type: :model do
   end
 
   context "content が指定されていない場合" do
-    let(:article) { build(:article, content: nil)}
+    let(:article) { build(:article, content: nil) }
 
     it "エラーする" do
       article.valid?
