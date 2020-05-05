@@ -13,7 +13,7 @@ RSpec.describe "Articles", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.length).to eq 3
-        expect(res[0].keys).to eq ["id", "title", "content", "created_at", "updated_at", "number_of_likes", "user"]
+        expect(res[0].keys).to eq ["id", "title", "content", "created_at", "updated_at", "likes_count", "user"]
         expect(response).to have_http_status(:ok)
       end
     end
