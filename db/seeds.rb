@@ -1,6 +1,6 @@
 20.times do |_n|
   name = Faker::Name.name
-  email = "#{n}_" + Faker::Internet.email
+  email = "#{_n}_" + Faker::Internet.email
   password = Faker::Internet.password(min_length: 10)
   User.create!(
     name: name,
