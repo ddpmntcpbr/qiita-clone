@@ -19,3 +19,5 @@ test:
 production:
   <<: *default
   database: qiita_clone_production
+  username: qiita_clone
+  password: <%= ENV['QIITA_CLONE_DATABASE_PASSWORD'] %>
