@@ -71,6 +71,7 @@ RSpec.describe "Articles", type: :request do
 
   describe "PATCH api/v1/articles" do
     subject { patch(api_v1_article_path(article.id), params: params) }
+
     let(:current_user) { create(:user) }
     let(:params) { { article: { title: Faker::Lorem.sentence, content: Faker::Lorem.paragraph, created_at: Time.current } } }
 
@@ -84,7 +85,7 @@ RSpec.describe "Articles", type: :request do
       it "更新できる" do
         expect { subject }.to change { Article.find(article.id).title }.from(article.title).to(params[:article][:title]) &
                               change { Article.find(article.id).content }.from(article.content).to(params[:article][:content]) &
-                          not_change { Article.find(article.id).created_at }
+                              not_change { Article.find(article.id).created_at }
         expect(response).to have_http_status(:ok)
       end
     end
