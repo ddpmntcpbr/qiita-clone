@@ -60,7 +60,7 @@ RSpec.describe "Articles", type: :request do
 
     context "正しく article を作成する場合" do
       it "article のレコードが作成できる" do
-        expect { subject }.to change { Article.count }.by(1)
+        expect { subject }.to change { current_user.articles.count }.by(1)
         res = JSON.parse(response.body)
         expect(res["title"]).to eq params[:article][:title]
         expect(res["content"]).to eq params[:article][:content]
