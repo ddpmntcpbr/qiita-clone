@@ -5,7 +5,6 @@ ruby "2.6.2"
 
 gem "active_model_serializers", "~> 0.10.0"
 gem "bootsnap", ">= 1.1.0", require: false
-gem "coffee-rails", "~> 5.0.0"
 gem "devise_token_auth"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
 gem "puma", "~> 3.11"

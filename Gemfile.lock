@@ -75,13 +75,6 @@ GEM
       activesupport
     choice (0.2.0)
     coderay (1.1.2)
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     devise (4.7.1)
@@ -289,7 +282,6 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   annotate
   bootsnap (>= 1.1.0)
-  coffee-rails (~> 5.0.0)
   devise_token_auth
   factory_bot_rails
   faker
