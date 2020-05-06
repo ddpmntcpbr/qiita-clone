@@ -38,5 +38,13 @@ RSpec.describe "Articles", type: :request do
         expect(res["user"]["name"]).to eq article.user.name
       end
     end
+
+    context "指定した id の article が存在しない場合" do
+      let(:article_id) { 1000000 }
+
+      it "article が見つからない" do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
   end
 end
