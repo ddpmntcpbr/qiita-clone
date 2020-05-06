@@ -40,10 +40,31 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "指定した id の article が存在しない場合" do
-      let(:article_id) { 1000000 }
+      let(:article_id) { 1_000_000 }
 
       it "article が見つからない" do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
+  describe "POST api/v1/articles" do
+    subject { post(api_v1_articles_path, params: params) }
+
+    let(:current_user) { create(:user) }
+    let(:params) { { article: attributes_for(:article) } }
+
+    before do
+      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
+    end
+
+    context "正しく article を作成する場合" do
+      it "article のレコードが作成できる" do
+        expect { subject }.to change { current_user.articles.count }.by(1)
+        res = JSON.parse(response.body)
+        expect(res["title"]).to eq params[:article][:title]
+        expect(res["content"]).to eq params[:article][:content]
+        expect(response).to have_http_status(:ok)
       end
     end
   end
