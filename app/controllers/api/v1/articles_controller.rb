@@ -5,7 +5,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   end
 
   def show
-    @article = Article.find(params[:id])
-    render json: @article
+    article = Article.find(params[:id])
+    render json: article
   end
 end
