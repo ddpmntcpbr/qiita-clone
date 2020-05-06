@@ -23,11 +23,11 @@ ActiveRecord::Base.transaction do
 
   300.times do |_n|
     content = Faker::Lorem.paragraph
-    usr_ids = User.pluck(:id)
-    user_id = usr_ids.sample
-    usr_ids.delete(user_id)
-    other_user_id = usr_ids.sample
-    article_id = Article.where(user_id: other_user_id).to_a.map(&:id).sample
+    user_ids = User.pluck(:id)
+    user_id = user_ids.sample
+    user_ids.delete(user_id)
+    other_user_id = user_ids.sample
+    article_id = Article.where(user_id: other_user_id).pluck(:id).sample
     next unless article_id
 
     Comment.create!(
@@ -38,10 +38,10 @@ ActiveRecord::Base.transaction do
   end
 
   Article.find_each do |article|
-    usr_ids = User.all.to_a.map(&:id)
-    usr_ids.delete(article.user.id)
-    others_usr_ids = usr_ids
-    others_usr_ids.each do |other_user_id|
+    user_ids = User.pluck(:id)
+    user_ids.delete(article.user.id)
+    others_user_ids = user_ids
+    others_user_ids.each do |other_user_id|
       next unless [true, false].sample
 
       ArticleLike.create!(
