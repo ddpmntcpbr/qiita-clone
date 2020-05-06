@@ -22,6 +22,6 @@ class Api::V1::ArticlesController < Api::V1::ApiController
 
     # 後でdevise_auth_tokenに取って替わる
     def current_user
-      @curren_user = User.first
+      @current_user ||= User.first
     end
 end
