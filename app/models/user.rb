@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :article_likes, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
+  validates :email, uniqueness: { case_sensitive: true }
 end
