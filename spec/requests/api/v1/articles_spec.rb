@@ -83,10 +83,9 @@ RSpec.describe "Articles", type: :request do
       let(:article) { create(:article, user: current_user) }
 
       it "更新できる" do
-        article.reload
-        expect { subject }.to change { Article.find(article.id).title }.from(article.title).to(params[:article][:title]) &
-                              change { Article.find(article.id).content }.from(article.content).to(params[:article][:content]) &
-                              not_change { Article.find(article.id).created_at }
+        expect { subject }.to change { article.reload.title }.from(article.title).to(params[:article][:title]) &
+                              change { article.reload.content }.from(article.content).to(params[:article][:content]) &
+                              not_change { article.reload.created_at }
         expect(response).to have_http_status(:ok)
       end
     end
