@@ -17,7 +17,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   private
 
     def article_params
-      params.require(:article).permit(:title,:content)
+      params.require(:article).permit(:title, :content)
     end
 
     # 後でdevise_auth_tokenに取って替わる

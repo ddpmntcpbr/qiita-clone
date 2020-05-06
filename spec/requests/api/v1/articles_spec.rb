@@ -40,7 +40,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "指定した id の article が存在しない場合" do
-      let(:article_id) { 1000000 }
+      let(:article_id) { 1_000_000 }
 
       it "article が見つからない" do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
@@ -49,9 +49,10 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "POST api/v1/articles" do
-    subject { post(api_v1_articles_path, params:params) }
+    subject { post(api_v1_articles_path, params: params) }
+
     let(:current_user) { create(:user) }
-    let(:params) { {article: attributes_for(:article)} }
+    let(:params) { { article: attributes_for(:article) } }
 
     before do
       allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
