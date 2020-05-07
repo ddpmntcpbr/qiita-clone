@@ -98,4 +98,30 @@ RSpec.describe "Articles", type: :request do
       end
     end
   end
+
+  describe "DELETE /aoi/v1/articles/:id" do
+    subject { delete(api_v1_article_path(article.id)) }
+    let(:current_user) { create(:user) }
+
+    before do
+      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
+    end
+
+    context "article の作者が自分自身の場合" do
+      let!(:article) { create(:article, user: current_user) }
+
+      it "削除できる" do
+        expect { subject }.to change { Article.count }.by(-1)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "article の作者が他人の場合" do
+      let!(:article) { create(:article) }
+
+      it "削除できない" do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end
