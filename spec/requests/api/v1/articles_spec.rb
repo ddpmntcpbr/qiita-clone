@@ -101,6 +101,7 @@ RSpec.describe "Articles", type: :request do
 
   describe "DELETE /aoi/v1/articles/:id" do
     subject { delete(api_v1_article_path(article.id)) }
+
     let(:current_user) { create(:user) }
 
     before do

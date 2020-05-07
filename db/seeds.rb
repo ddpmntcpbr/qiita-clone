@@ -44,7 +44,7 @@ ActiveRecord::Base.transaction do
 
       ArticleLike.create!(
         user_id: other_user_id,
-        article: article
+        article: article,
       )
     end
   end
