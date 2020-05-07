@@ -10,7 +10,7 @@ ActiveRecord::Base.transaction do
     )
   end
 
-  100.times do |_n|
+  100.times do
     title = Faker::Lorem.sentence
     content = Faker::Lorem.paragraph
     user_id = User.pluck(:id).sample
@@ -21,7 +21,7 @@ ActiveRecord::Base.transaction do
     )
   end
 
-  300.times do |_n|
+  300.times do
     content = Faker::Lorem.paragraph
     user_ids = User.pluck(:id)
     user_id = user_ids.sample
@@ -38,15 +38,13 @@ ActiveRecord::Base.transaction do
   end
 
   Article.find_each do |article|
-    user_ids = User.pluck(:id)
-    user_ids.delete(article.user.id)
-    others_user_ids = user_ids
-    others_user_ids.each do |other_user_id|
+    other_user_ids = User.where.not(id: article.user_id).pluck(:id)
+    other_user_ids.each do |other_user_id|
       next unless [true, false].sample
 
       ArticleLike.create!(
         user_id: other_user_id,
-        article_id: article.id,
+        article: article
       )
     end
   end
