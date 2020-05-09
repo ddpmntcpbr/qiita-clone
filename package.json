@@ -20,5 +20,8 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
     "webpack-dev-server": "^3.7.2"
-  }
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+   }
 }
