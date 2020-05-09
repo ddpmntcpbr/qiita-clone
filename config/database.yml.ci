@@ -1,9 +1,11 @@
 test:
-   adapter: mysql2
-   encoding: utf8
-   pool: 5
-   username: <%= ENV.fetch("MYSQL_USER", "root") %>
-   password:
-   host: <%= ENV.fetch("MYSQL_HOST", "127.0.0.1") %>
-   port: <%= ENV.fetch("MYSQL_PORT", "3306") %>
-   database: <%= ENV.fetch("MYSQL_DATABASE", "circleci-example-for-rails_test") %>
+  adapter: mysql2
+  pool: 5
+  username: <%= ENV.fetch("MYSQL_USER", "root") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD", "root") %>
+  host: <%= ENV.fetch("MYSQL_HOST", "127.0.0.1") %>
+  port: <%= ENV.fetch("MYSQL_PORT", "3306") %>
+  database: <%= ENV.fetch("MYSQL_DATABASE", "qiita_clone_test") %>
+  charset: utf8mb4
+  collation: utf8mb4_bin
+  encoding: utf8mb4
