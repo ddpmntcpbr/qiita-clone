@@ -112,7 +112,7 @@ RSpec.describe "Articles", type: :request do
       let!(:article) { create(:article, user: current_user) }
 
       it "削除できる" do
-        expect { subject }.to change { Article.count }.by(-1)
+        expect { subject }.to change { current_user.articles.count }.by(-1)
         expect(response).to have_http_status(:ok)
       end
     end
