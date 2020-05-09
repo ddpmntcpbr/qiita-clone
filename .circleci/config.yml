@@ -52,28 +52,14 @@ jobs:
           paths:
             - vendor/bundle
 
-  rubocop:
-    executor:
-      name: default_container
-    steps:
-      - restore_cache:
-          key: v1-qiita_clone-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - install_bundler
-      - run:
-          name: Execute rubocop
-          command: |
-            bundle exec rubocop
   rspec:
     executor:
       name: default_container
     steps:
       - restore_cache:
-          key: v1-qiita_clone-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-circleci-example-for-rails-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
       - run:
           name: Watting stand up database
           command: |
@@ -86,15 +72,13 @@ jobs:
           name: Testing DB migration and seed
           command: |
             bundle exec rails db:create db:migrate db:seed db:drop
-      # mkdir directory for upload test results
-      - run: mkdir /tmp/test-results
-      - run: mkdir -p ~/rspec
-
       - run:
           name: Run rspec
           command: |
+            mkdir /tmp/test-results
+            mkdir -p ~/rspec
             bundle exec rails db:create db:migrate
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
             bundle exec rspec --require rails_helper \
                               --color \
                               --format progress \
@@ -106,6 +90,20 @@ jobs:
       - store_artifacts:
           path: ~/tmp/test-results
           destination: test-results
+
+  rubocop:
+    executor:
+      name: default_container
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v1-circleci-example-for-rails-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache: # vendor/bundleを復元
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - install_bundler
+      - run:
+          name: Execute rubocop
+          command: |
+            bundle exec rubocop
 
 workflows:
   build:
