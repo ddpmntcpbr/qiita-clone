@@ -1,4 +1,6 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
+  before_action :set_article, only: [:update, :destroy]
+
   def index
     articles = Article.order(created_at: :desc)
     render json: articles
@@ -15,15 +17,23 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   end
 
   def update
-    article = current_user.articles.find(params[:id])
-    article.update!(article_params)
-    render json: article
+    @article.update!(article_params)
+    render json: @article
+  end
+
+  def destroy
+    @article.destroy!
+    render json: {}, status: :ok
   end
 
   private
 
     def article_params
       params.require(:article).permit(:title, :content)
+    end
+
+    def set_article
+      @article = current_user.articles.find(params[:id])
     end
 
     # 後でdevise_auth_tokenに取って替わる
