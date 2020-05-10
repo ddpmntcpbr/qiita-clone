@@ -42,4 +42,47 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       end
     end
   end
+
+  describe "POST /api/v1/auth/sign_in" do
+    subject { post(user_session_path, params: params) }
+    let(:user) { create(:user) }
+    context "正しいユーザー情報を送信したとき" do
+      let(:params) { { email: user.email, password: user.password } }
+      it "ログインできる" do
+        subject
+        res = JSON.parse(response.body)
+        expect(response.headers["uid"]).to be_present
+        expect(response.headers["access-token"]).to be_present
+        expect(response.headers["client"]).to be_present
+        expect(response).to have_http_status(:ok)
+      end
+    end
+    context "メールアドレスが正しくないとき" do
+      let(:params) { { email: "aaaa@aaaa.aaaa", password: user.password } }
+      it "ログインできない" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["success"]).to be_falsey
+        expect(res["errors"]).to include("Invalid login credentials. Please try again.")
+        expect(response.headers["uid"]).to be_blank
+        expect(response.headers["access-token"]).to be_blank
+        expect(response.headers["client"]).to be_blank
+        expect(response).to have_http_status(401)
+      end
+    end
+    context "パスワードが正しくないとき" do
+      let(:params) { { email: user.email, password: "a"*9 } }
+      it "ログインできない" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["success"]).to be_falsey
+        expect(res["errors"]).to include("Invalid login credentials. Please try again.")
+        expect(response.headers["uid"]).to be_blank
+        expect(response.headers["access-token"]).to be_blank
+        expect(response.headers["client"]).to be_blank
+        expect(response).to have_http_status(401)
+      end
+    end
+  end
+
 end
