@@ -51,7 +51,6 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       let(:params) { { email: user.email, password: user.password } }
       it "ログインできる" do
         subject
-        res = JSON.parse(response.body)
         expect(response.headers["uid"]).to be_present
         expect(response.headers["access-token"]).to be_present
         expect(response.headers["client"]).to be_present
