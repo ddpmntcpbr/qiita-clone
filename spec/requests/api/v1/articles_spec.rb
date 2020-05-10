@@ -49,14 +49,11 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "POST api/v1/articles" do
-    subject { post(api_v1_articles_path, params: params) }
+    subject { post(api_v1_articles_path, params: params, headers: headers ) }
 
+    let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
     let(:params) { { article: attributes_for(:article) } }
-
-    before do
-      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
-    end
 
     context "正しく article を作成する場合" do
       it "article のレコードが作成できる" do
@@ -70,14 +67,11 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "PATCH api/v1/articles" do
-    subject { patch(api_v1_article_path(article.id), params: params) }
+    subject { patch(api_v1_article_path(article.id), params: params, headers: headers) }
 
+    let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
     let(:params) { { article: { title: Faker::Lorem.sentence, content: Faker::Lorem.paragraph, created_at: Time.current } } }
-
-    before do
-      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
-    end
 
     context "article の作者が自分自身の場合" do
       let(:article) { create(:article, user: current_user) }
@@ -100,8 +94,9 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "DELETE /aoi/v1/articles/:id" do
-    subject { delete(api_v1_article_path(article.id)) }
+    subject { delete(api_v1_article_path(article.id), headers: headers) }
 
+    let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
 
     before do
