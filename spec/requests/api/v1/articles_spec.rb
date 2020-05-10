@@ -49,7 +49,7 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "POST api/v1/articles" do
-    subject { post(api_v1_articles_path, params: params, headers: headers ) }
+    subject { post(api_v1_articles_path, params: params, headers: headers) }
 
     let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
