@@ -65,7 +65,6 @@ jobs:
       - run: mv ./config/database.yml.ci ./config/database.yml
       - install_bundler
       - run: bundle install
-      - run: rspec_junit_formatter
       - run:
           name: Testing DB migration and seed
           command: |
