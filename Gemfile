@@ -19,6 +19,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
+  gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "rubocop-faker"
   gem "rubocop-rails"
