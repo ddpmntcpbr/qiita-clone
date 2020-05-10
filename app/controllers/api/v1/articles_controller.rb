@@ -1,5 +1,6 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
   before_action :set_article, only: [:update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     articles = Article.order(created_at: :desc)
@@ -34,10 +35,5 @@ class Api::V1::ArticlesController < Api::V1::ApiController
 
     def set_article
       @article = current_user.articles.find(params[:id])
-    end
-
-    # 後でdevise_auth_tokenに取って替わる
-    def current_user
-      @current_user ||= User.first
     end
 end
