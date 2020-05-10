@@ -20,6 +20,7 @@ group :development, :test do
   gem "pry-doc"
   gem "pry-rails"
   gem "rspec-rails"
+  gem "rspec_junit_formatter"
   gem "rubocop-faker"
   gem "rubocop-rails"
   gem "rubocop-rspec"
