@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   describe "POST /api/v1/auth" do
-    subject { post(user_registration_path, params: params) }
+    subject { post(api_v1_user_registration_path, params: params) }
 
     context "必要なパラメータを送信したとき" do
       let(:params) { attributes_for(:user).slice(:name, :email, :password) }
@@ -44,7 +44,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   end
 
   describe "POST /api/v1/auth/sign_in" do
-    subject { post(user_session_path, params: params) }
+    subject { post(api_v1_user_session_path, params: params) }
 
     let(:user) { create(:user) }
     context "正しいユーザー情報を送信したとき" do
@@ -88,7 +88,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   end
 
   describe "DELETE /api/v1/auth/sign_out" do
-    subject { delete(destroy_user_session_path, headers: headers) }
+    subject { delete(destroy_api_v1_user_session_path, headers: headers) }
 
     let(:current_user) { create(:user) }
     context "正しいヘッダー情報を送信したとき" do
