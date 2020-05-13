@@ -36,7 +36,7 @@ export default class ArticlesContainer extends Vue {
   async createArticle(): Promise<void> {
     const params = {
       title: this.title,
-      body: this.body
+      content: this.content
     };
     await axios
       .post("/api/v1/articles", params, headers)
