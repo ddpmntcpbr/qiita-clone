@@ -32,7 +32,7 @@ const headers = {
 @Component
 export default class ArticlesContainer extends Vue {
   title: string = "";
-  body: string = "";
+  content: string = "";
   async createArticle(): Promise<void> {
     const params = {
       title: this.title,
