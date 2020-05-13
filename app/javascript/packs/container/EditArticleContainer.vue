@@ -6,12 +6,12 @@
         outline
         no-resize
         height="100%"
-        v-model="body"
-        name="body"
+        v-model="content"
+        name="content"
         label="プログラミング知識をMarkdown記法で書いて共有しよう"
-        class="body-form"
+        class="content-form"
       ></v-textarea>
-      <div v-html="compiledMarkdown(this.body)" class="preview">a</div>
+      <div v-html="compiledMarkdown(this.content)" class="preview">a</div>
     </div>
     <div class="text-xs-right">
       <v-btn @click="createArticle" color="#55c500" class="font-weight-bold white--text">Qiitaに投稿</v-btn>
@@ -37,20 +37,16 @@ const headers = {
 @Component
 export default class ArticlesContainer extends Vue {
   title: string = "";
-  body: string = "";
+  content: string = "";
   async created(): Promise<void> {
-    // Add 'hljs' class to code tag
     const renderer = new marked.Renderer();
     let data = "";
     renderer.code = function(code, lang) {
-      if (!lang || lang == "default") {
-        data = hljs.highlightAuto(code, [lang]).value;
-      } else {
-        try {
-          data = hljs.highlight(lang, code, true).value;
-        } catch (e) {
-          // Do nonthing!
-        }
+      const _lang = lang.split(".").pop();
+      try {
+        data = hljs.highlight(_lang, code, true).value;
+      } catch (e) {
+        data = hljs.highlightAuto(code).value;
       }
       return `<pre><code class="hljs"> ${data} </code></pre>`;
     };
@@ -69,7 +65,7 @@ export default class ArticlesContainer extends Vue {
   async createArticle(): Promise<void> {
     const params = {
       title: this.title,
-      body: this.body
+      content: this.content
     };
     await axios
       .post("/api/v1/articles", params, headers)
@@ -111,7 +107,7 @@ export default class ArticlesContainer extends Vue {
 </style>
 
 <style lang="scss">
-.body-form > .v-input__control {
+.content-form > .v-input__control {
   height: 100%;
 }
 .v-text-field .v-text-field__details {

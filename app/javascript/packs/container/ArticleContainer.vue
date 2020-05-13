@@ -7,8 +7,8 @@
     <v-layout>
       <h1 class="article-title">{{ article.title }}</h1>
     </v-layout>
-    <v-layout class="article-body-container">
-      <div class="article-body" v-html="compiledMarkdown(article.body)"></div>
+    <v-layout class="article-content-container">
+      <div class="article-content" v-html="compiledMarkdown(article.content)"></div>
     </v-layout>
   </v-container>
 </template>
@@ -30,18 +30,14 @@ export default class ArticleContainer extends Vue {
     await this.fetchArticle(this.$route.params.id);
   }
   async created(): Promise<void> {
-    // Add 'hljs' class to code tag
     const renderer = new marked.Renderer();
     let data = "";
     renderer.code = function(code, lang) {
-      if (!lang || lang == "default") {
-        data = hljs.highlightAuto(code, [lang]).value;
-      } else {
-        try {
-          data = hljs.highlight(lang, code, true).value;
-        } catch (e) {
-          // Do nonthing!
-        }
+      const _lang = lang.split(".").pop();
+      try {
+        data = hljs.highlight(_lang, code, true).value;
+      } catch (e) {
+        data = hljs.highlightAuto(code).value;
       }
       return `<pre><code class="hljs"> ${data} </code></pre>`;
     };
@@ -82,11 +78,11 @@ export default class ArticleContainer extends Vue {
   font-size: 2.5em;
   line-height: 1.4;
 }
-.article-body-container {
+.article-content-container {
   margin: 2em 0;
   font-size: 16px;
 }
-.article-body {
+.article-content {
   width: 100%;
 }
 .user-name {
