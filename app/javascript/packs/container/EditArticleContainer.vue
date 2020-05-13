@@ -5,10 +5,10 @@
       outline
       no-resize
       height="100%"
-      v-model="body"
-      name="body"
+      v-model="content"
+      name="content"
       label="プログラミング知識をMarkdown記法で書いて共有しよう"
-      class="body-form"
+      class="content-form"
     ></v-textarea>
     <div class="text-xs-right">
       <v-btn @click="createArticle" color="#55c500" class="font-weight-bold white--text">Qiitaに投稿</v-btn>
@@ -64,7 +64,7 @@ export default class ArticlesContainer extends Vue {
 </style>
 
 <style lang="scss">
-.body-form > .v-input__control {
+.content-form > .v-input__control {
   height: 100%;
 }
 .v-text-field .v-text-field__details {
