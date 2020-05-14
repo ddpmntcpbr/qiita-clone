@@ -33,6 +33,7 @@ RSpec.describe "Articles", type: :request do
 
         expect(res["title"]).to eq article.title
         expect(res["content"]).to eq article.content
+        expect(res["updated_at"]).to be_present
         expect(res["likes_count"]).to eq article.article_likes.count
         expect(res["user"]["id"]).to eq article.user.id
         expect(res["user"]["name"]).to eq article.user.name
