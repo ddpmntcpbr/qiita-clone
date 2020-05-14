@@ -6,7 +6,7 @@ RSpec.describe Article, type: :model do
 
     it "article が下書き保存される" do
       expect(article.valid?).to eq true
-      expect(article.status). to eq "draft"
+      expect(article.status).to eq "draft"
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe Article, type: :model do
 
     it "article が公開される" do
       expect(article.valid?).to eq true
-      expect(article.status). to eq "published"
+      expect(article.status).to eq "published"
     end
   end
 
