@@ -51,7 +51,7 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "指定した id の article が下書き保存状態の場合" do
-      let(:article) { create(:article,:save_draft) }
+      let(:article) { create(:article, :save_draft) }
       let(:article_id) { article.id }
 
       it "article が見つからない" do
