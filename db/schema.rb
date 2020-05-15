@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_121151) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "status", default: false
+    t.string "status", default: "draft"
     t.index ["status"], name: "index_articles_on_status"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
