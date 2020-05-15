@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Article, type: :model do
   context "パラメータが正常かつ下書き保存の場合" do
-    let(:article) { build(:article) }
+    let(:article) { build(:article, :save_draft) }
 
     it "article が下書き保存される" do
       expect(article.valid?).to eq true
@@ -11,7 +11,7 @@ RSpec.describe Article, type: :model do
   end
 
   context "パラメータが正常かつ公開設定の場合" do
-    let(:article) { build(:article, status: "published") }
+    let(:article) { build(:article) }
 
     it "article が公開される" do
       expect(article.valid?).to eq true
