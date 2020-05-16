@@ -7,10 +7,12 @@ RSpec.describe "Articles", type: :request do
     context "DB 上に article レコードが存在する場合" do
       before do
         create_list(:article, 3)
+        create_list(:article, 2, :save_draft)
       end
 
-      it "article の一覧が取得できる" do
+      it "公開状態の article の一覧が取得できる" do
         subject
+        expect(Article.count).to eq 5
         res = JSON.parse(response.body)
         expect(res.length).to eq 3
         expect(res[0].keys).to eq ["id", "title", "content", "created_at", "updated_at", "likes_count", "user"]
@@ -47,6 +49,15 @@ RSpec.describe "Articles", type: :request do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
+
+    context "指定した id の article が下書き保存状態の場合" do
+      let(:article) { create(:article, :save_draft) }
+      let(:article_id) { article.id }
+
+      it "article が見つからない" do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
   end
 
   describe "POST api/v1/articles" do
@@ -54,11 +65,24 @@ RSpec.describe "Articles", type: :request do
 
     let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
-    let(:params) { { article: attributes_for(:article) } }
 
-    context "正しく article を作成する場合" do
-      it "article のレコードが作成できる" do
-        expect { subject }.to change { current_user.articles.count }.by(1)
+    context "正しく article を作成して公開する場合" do
+      let(:params) { { article: attributes_for(:article) } }
+
+      it "article のレコード(公開状態)が保存される" do
+        expect { subject }.to change { current_user.articles.published.count }.by(1)
+        res = JSON.parse(response.body)
+        expect(res["title"]).to eq params[:article][:title]
+        expect(res["content"]).to eq params[:article][:content]
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "正しく article を作成して下書き保存する場合" do
+      let(:params) { { article: attributes_for(:article, :save_draft) } }
+
+      it "article のレコード(下書き状態)が保存される" do
+        expect { subject }.to change { current_user.articles.draft.count }.by(1)
         res = JSON.parse(response.body)
         expect(res["title"]).to eq params[:article][:title]
         expect(res["content"]).to eq params[:article][:content]
@@ -94,7 +118,7 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "DELETE /aoi/v1/articles/:id" do
+  describe "DELETE /api/v1/articles/:id" do
     subject { delete(api_v1_article_path(article.id), headers: headers) }
 
     let(:headers) { current_user.create_new_auth_token }
