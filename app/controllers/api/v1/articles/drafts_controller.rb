@@ -1,4 +1,6 @@
-class Api::V1::DraftsController < Api::V1::ApiController
+class Api::V1::Articles::DraftsController < Api::V1::ApiController
+  before_action :authenticate_user!, only: [:index, :show]
+
   def index
     articles = current_user.articles.draft.order(created_at: :desc)
     render json: articles
