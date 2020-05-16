@@ -26,8 +26,9 @@ RSpec.describe "Api::V1::Articles::Drafts", type: :request do
 
   describe "GET api/v1/articles/draft/:id" do
     subject { get(api_v1_articles_draft_path(article_id), headers: headers) }
-      let(:headers) { current_user.create_new_auth_token }
-      let(:current_user) { create(:user) }
+
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
 
     context "指定した id の article(下書き) が存在する場合" do
       let(:article) { create(:article, :save_draft, user: current_user) }

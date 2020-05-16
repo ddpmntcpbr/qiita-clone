@@ -18,7 +18,7 @@ ActiveRecord::Base.transaction do
       title: title,
       content: content,
       user_id: user_id,
-      status: "published"
+      status: "published",
     )
   end
 
