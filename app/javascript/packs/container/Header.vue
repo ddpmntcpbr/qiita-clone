@@ -18,8 +18,8 @@
         </template>
 
         <v-list>
-          <v-list-tile v-for="(menu, i) in menus" :key="i" @click="undefined">
-            <v-list-tile-title @click="menu.click">{{ menu.title }}</v-list-tile-title>
+          <v-list-tile v-for="(menu, i) in menus" :key="i">
+            <v-list-tile-title @click="menu.click" class="menu-title">{{ menu.title }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -117,5 +117,8 @@ export default class Header extends Vue {
 }
 .login {
   font-weight: bold;
+}
+.menu-title {
+  cursor : pointer;
 }
 </style>
