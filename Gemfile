@@ -16,15 +16,15 @@ gem "webpacker", "~> 4.x"
 group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
+  gem "mysql2", ">= 0.4.4", "< 0.6.0"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
-  gem "rspec-rails"
   gem "rspec_junit_formatter"
+  gem "rspec-rails"
   gem "rubocop-faker"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "mysql2", ">= 0.4.4", "< 0.6.0"
 end
 
 group :development do
