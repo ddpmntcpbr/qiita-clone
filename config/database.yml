@@ -4,16 +4,19 @@ default: &default
   host: 127.0.0.1
   username: root
   password: root
-  charset: utf8mb4
-  collation: utf8mb4_bin
-  encoding: utf8mb4
 
 development:
   <<: *default
+  charset: utf8mb4
+  collation: utf8mb4_bin
+  encoding: utf8mb4
   database: qiita_clone_development
 
 test:
   <<: *default
+  charset: utf8mb4
+  collation: utf8mb4_bin
+  encoding: utf8mb4
   database: qiita_clone_test
 
 production:
